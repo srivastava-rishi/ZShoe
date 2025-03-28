@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ZShoe</string>
+    <string name="shoes">Shoes</string>
+    <string name="add_to_bag">Add to Bag</string>
+    <string name="select_size">Select Size</string>
+    <string name="total_options">%s OPTIONS</string>
+</resources>
