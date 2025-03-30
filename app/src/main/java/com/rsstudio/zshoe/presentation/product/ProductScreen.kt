@@ -4,6 +4,8 @@ import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.BoundsTransform
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -274,11 +276,12 @@ fun SharedTransitionScope.PopularCategoryItem(
             .noRippleClickable {
                 onClickPopularItem(item)
             }
-            .sharedElement(
-                state = rememberSharedContentState(
-                    key = item.getBackgroundId()
-                ),
-                animatedVisibilityScope = animatedVisibilityScope
+            .sharedBounds(
+                rememberSharedContentState(key = item.getBackgroundId()),
+                animatedVisibilityScope = animatedVisibilityScope,
+                enter = fadeIn(),
+                exit = fadeOut(),
+                resizeMode = SharedTransitionScope.ResizeMode.ScaleToBounds()
             )
     ) {
         Column(
@@ -316,7 +319,7 @@ fun SharedTransitionScope.PopularCategoryItem(
                     .offset(x = 12.dp)
                     .rotate(rotate)
                     .sharedElement(
-                        state = rememberSharedContentState(
+                        sharedContentState = rememberSharedContentState(
                             key = "image${item.id}-${item.image}"
                         ),
                         animatedVisibilityScope = animatedVisibilityScope,

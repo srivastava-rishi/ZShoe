@@ -5,6 +5,8 @@ import androidx.compose.animation.BoundsTransform
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -120,14 +122,12 @@ fun SharedTransitionScope.ProductDetailContent(
                 Icon(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .sharedElement(
-                            state = rememberSharedContentState(
-                                key = uiState.backgroundId
-                            ),
+                        .sharedBounds(
+                            rememberSharedContentState(key = uiState.backgroundId),
                             animatedVisibilityScope = animatedVisibilityScope,
-                            boundsTransform = { _, _ ->
-                                tween(durationMillis = 1000)
-                            }
+                            enter = fadeIn(),
+                            exit = fadeOut(),
+                            resizeMode = SharedTransitionScope.ResizeMode.ScaleToBounds()
                         ),
                     painter = painterResource(id = AppDrawable.ic_arc),
                     contentDescription = "",
@@ -173,7 +173,7 @@ fun SharedTransitionScope.ProductDetailContent(
                                 .width(290.dp)
                                 .height(160.dp)
                                 .sharedElement(
-                                    state = rememberSharedContentState(
+                                    sharedContentState = rememberSharedContentState(
                                         key = uiState.imageId
                                     ),
                                     animatedVisibilityScope = animatedVisibilityScope,

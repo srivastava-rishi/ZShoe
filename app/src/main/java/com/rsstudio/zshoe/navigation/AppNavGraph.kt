@@ -17,7 +17,7 @@ import androidx.navigation.navArgument
 import com.rsstudio.zshoe.presentation.detail.ProductDetailScreen
 import com.rsstudio.zshoe.presentation.product.ProductScreen
 
-@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalAnimationSpecApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun AppNavGraph(
     modifier: Modifier = Modifier,
